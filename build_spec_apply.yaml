@@ -1,0 +1,13 @@
+version: 0.1
+component: build
+shell: bash
+steps:
+  - type: Command
+    name: terraform_apply
+    command: |
+      set -euo pipefail
+      export TF_IN_AUTOMATION=1
+      export TF_VAR_auth=ResourcePrincipal
+
+      terraform init -input=false
+      terraform apply -input=false -auto-approve

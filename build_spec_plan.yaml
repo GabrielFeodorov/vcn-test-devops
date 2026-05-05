@@ -1,0 +1,15 @@
+version: 0.1
+component: build
+shell: bash
+steps:
+  - type: Command
+    name: terraform_plan
+    command: |
+      set -euo pipefail
+      export TF_IN_AUTOMATION=1
+      export TF_VAR_auth=ResourcePrincipal
+
+      terraform init -input=false
+      terraform fmt -check
+      terraform validate
+      terraform plan -input=false -out=tfplan
